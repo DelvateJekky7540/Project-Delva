@@ -13,9 +13,14 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "project-delva",
-        "width": 800,
-        "height": 600
+        "title": "Project Delva",
+        "width": 400,
+        "height": 500,
+        "resizable": false,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true,
+        "skipTaskbar": true
       }
     ],
     "security": {

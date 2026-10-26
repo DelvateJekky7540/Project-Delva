@@ -28,15 +28,15 @@
         </svg>
       </div>
 
-      <!-- Tengah: Cuaca & Baterai (Mockup) -->
+      <!-- Tengah: Suhu & Baterai -->
       <div class="mini-info">
         <span class="mini-item">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          29°C
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+          <span id="mini-temp">--</span>
         </span>
         <span class="mini-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"/><line x1="23" y1="10" x2="23" y2="14"/></svg>
-          97%
+          <span id="compact-battery">97%</span>
         </span>
       </div>
 
@@ -52,77 +52,94 @@
 
       <div class="cc-header">
         <span id="expanded-time">00:00</span>
-        <span class="cc-battery">🔋 97%</span>
-      </div>
-
-      <!-- FITUR: Now Playing (Musik) -->
-      <div class="cc-music">
-        <div class="music-icon">🎵</div>
-        <div class="music-info">
-          <span class="music-title">Lofi Beats to Code To</span>
-          <span class="music-artist">Chillhop Music</span>
-        </div>
-        <div class="music-controls">
-          <button>⏮</button>
-          <button>⏸</button>
-          <button>⏭</button>
+        <div class="cc-header-right">
+          <span class="cc-battery">🔋 <span id="expanded-battery">97%</span></span>
+          <button class="cc-collapse" type="button" onclick="toggleIsland()" title="Collapse">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+          </button>
         </div>
       </div>
 
-      <!-- Tombol Wi-Fi & Bluetooth -->
-      <div class="cc-grid">
-        <div class="cc-btn active">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
-          <div class="cc-info">
-            <span class="cc-title">Wi-Fi</span>
-            <span class="cc-status">Connected</span>
+      <!-- Tab Navigation -->
+      <div class="cc-tabs">
+        <button class="tab-btn active" type="button" data-target="tab-system">System</button>
+        <button class="tab-btn" type="button" data-target="tab-music">Music</button>
+        <button class="tab-btn" type="button" data-target="tab-settings">Settings</button>
+      </div>
+
+      <!-- TAB: SYSTEM -->
+      <div id="tab-system" class="tab-content active">
+        <!-- FITUR: AI Status -->
+        <div class="cc-ai">
+          <span class="ai-dot"></span>
+          <span>OpenCode is ready to assist.</span>
+        </div>
+
+        <!-- Status Wi-Fi & Bluetooth (read-only) -->
+        <div class="cc-grid">
+          <div id="wifi-status-item" class="network-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            <div class="cc-info">
+              <span class="cc-title">Wi-Fi</span>
+              <span class="cc-status status-text" id="wifi-status">Disconnected</span>
+            </div>
+          </div>
+
+          <div id="bluetooth-status-item" class="network-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"/></svg>
+            <div class="cc-info">
+              <span class="cc-title">Bluetooth</span>
+              <span class="cc-status status-text" id="bluetooth-status">Disconnected</span>
+            </div>
           </div>
         </div>
 
-        <div class="cc-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"/></svg>
-          <div class="cc-info">
-            <span class="cc-title">Bluetooth</span>
-            <span class="cc-status">Off</span>
+        <!-- System Usage -->
+        <div class="cc-system">
+          <div class="sys-item">
+            <span class="sys-label">CPU</span>
+            <span class="sys-value" id="sys-cpu">--</span>
+          </div>
+          <div class="sys-item">
+            <span class="sys-label">RAM</span>
+            <span class="sys-value" id="sys-ram">--</span>
+          </div>
+          <div class="sys-item">
+            <span class="sys-label">Temp</span>
+            <span class="sys-value" id="sys-temp">--</span>
           </div>
         </div>
       </div>
 
-      <!-- System Usage -->
-      <div class="cc-system">
-        <div class="sys-item">
-          <span class="sys-label">CPU</span>
-          <span class="sys-value">12%</span>
-        </div>
-        <div class="sys-item">
-          <span class="sys-label">RAM</span>
-          <span class="sys-value">4.2 GB</span>
-        </div>
-        <div class="sys-item">
-          <span class="sys-label">Temp</span>
-          <span class="sys-value">45°C</span>
+      <!-- TAB: MUSIC -->
+      <div id="tab-music" class="tab-content">
+        <div class="cc-music">
+          <div class="music-icon" aria-label="Album cover placeholder">🎵</div>
+          <div class="music-info">
+            <span class="music-title">Lofi Beats to Code To</span>
+            <span class="music-artist">Chillhop Music</span>
+          </div>
+          <div class="music-controls">
+            <button type="button">⏮</button>
+            <button type="button">⏸</button>
+            <button type="button">⏭</button>
+          </div>
         </div>
       </div>
 
-      <!-- FITUR: AI Status -->
-      <div class="cc-ai">
-        <span class="ai-dot"></span>
-        <span>OpenCode is ready to assist.</span>
-      </div>
-
-      <!-- Action Bar & Mode Selector -->
-      <div class="cc-actions">
-        <button onclick="toggleIsland()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-        </button>
-      </div>
-      
-      <div class="cc-modes">
-        <select id="mode-select" onchange="changeDisplayMode(this.value)">
-          <option value="fixed">Fixed (Always Visible)</option>
-          <option value="hover">Hover (Auto-Hide)</option>
-          <option value="minimal">Minimalist</option>
-        </select>
+      <!-- TAB: SETTINGS -->
+      <div id="tab-settings" class="tab-content">
+        <div class="cc-modes">
+          <label for="mode-select">Display Mode</label>
+          <div class="select-wrap">
+            <select id="mode-select" onchange="changeDisplayMode(this.value)">
+              <option value="fixed">Fixed (Always Visible)</option>
+              <option value="hover">Hover (Auto-Hide)</option>
+              <option value="minimal">Minimalist</option>
+            </select>
+            <svg class="select-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
       </div>
 
     </div>
